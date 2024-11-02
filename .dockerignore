@@ -1,0 +1,36 @@
+# Version control
+.git
+.gitignore
+.github
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.py[cod]
+*$py.class
+.pytest_cache
+.coverage
+htmlcov/
+
+# Project specific
+config/
+logs/
+*.md
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Development
+.vscode/
+.idea/
+*.swp
+*.swo
+.env
+.env.*
+
+# OS specific
+.DS_Store
+Thumbs.db

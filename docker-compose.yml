@@ -1,0 +1,36 @@
+version: '3.8'
+
+# Tautulli - Plex Media Server monitoring and tracking tool
+services:
+  tautulli:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: tautulli
+    ports:
+      - "8181:8181"  # Web interface port
+    volumes:
+      - ./config:/config  # Configuration files
+      - ./logs:/logs     # Log files
+    restart: unless-stopped
+    environment:
+      - PUID=1000        # User ID for file permissions
+      - PGID=1000        # Group ID for file permissions
+      - TZ=UTC           # Timezone (change as needed)
+    networks:
+      - tautulli_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8181/status"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+      start_period: 5s
+    security_opt:
+      - no-new-privileges:true
+    # Optional: Limit container resources
+    # mem_limit: 1g
+    # cpus: 2
+
+networks:
+  tautulli_net:
+    driver: bridge
